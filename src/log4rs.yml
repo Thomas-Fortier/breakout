@@ -1,0 +1,25 @@
+appenders:
+  console:
+    kind: console
+    encoder:
+      pattern: "[{h({l})}] {d(%Y-%m-%d %H:%M:%S)(utc)} {f}:{L} - {m}{n}"
+  rolling_appender:
+    kind: rolling_file
+    path: "log/breakout.log"
+    encoder:
+      pattern: "[{h({l})}] {d(%Y-%m-%d %H:%M:%S)(utc)} Thread:{T} {f}:{L} - {m}{n}"
+    policy:
+      trigger:
+        kind: size
+        limit: 500mb
+      roller:
+        kind: delete
+root:
+  level: off
+  appenders:
+    - console
+    - rolling_appender
+
+loggers:
+  breakout:
+    level: info
